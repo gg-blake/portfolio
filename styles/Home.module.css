@@ -81,3 +81,49 @@
     color: #6df3ff;
   }
 }
+
+.circularbanner {
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg) scale(105%);
+    }
+    100% {
+      transform: rotate(360deg) scale(105%);
+    }
+  }
+
+.screenbanner {
+  transform-origin: bottom left;
+  animation: revolve 20s linear infinite;
+}
+
+@keyframes revolve {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(calc(100vw), 0);
+  }
+  25.1% {
+    
+    transform: translate(calc(100vw)) rotate(-90deg);
+  }
+  50% {
+    transform: translate(calc(100vw), calc(-100vh)) rotate(-90deg);
+  }
+  50.1% {
+    transform: translate(calc(100vw), calc(-100vh)) rotate(-180deg);
+  }
+  75% {
+    transform: translate(0, calc(-100vh)) rotate(-180deg);
+  }
+  75.1% {
+    transform: translate(0, calc(-100vh)) rotate(-270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(-270deg);
+  }
+}

@@ -1,0 +1,12 @@
+.movingword {
+    animation: movearoundborder 5s infinite;
+}
+
+@keyframes movearoundborder {
+    0% {
+        translateX: 0; 
+    }
+    100% {
+        translateX: 100%;
+    }
+}
