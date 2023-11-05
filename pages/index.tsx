@@ -7,6 +7,7 @@ import Profile from '../components/profile'
 import OverviewCard from '../components/overview_card'
 import Timeline from '../components/timeline/timeline';
 import Photobook from '../components/photobook'
+import Projects from '../components/projects'
 
 
 export default function Home() {
@@ -73,6 +74,8 @@ export default function Home() {
         </div>
       </Timeline>
       <Photobook />
+      <Projects />
+      <div className="w-full h-[400px]"></div>
     </div>
   )
 }

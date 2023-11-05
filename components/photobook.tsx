@@ -4,8 +4,6 @@ import EXIF from "exif-js";
 const photosList = ["4792", "4819", "4865", "4886", "4891", "5008", "5010", "5054", "5092", "5147", "5149", "5153"]
     .map((id) => `/IMG_${id}.jpg`);
 
-
-
 function Photo({ src }: { src: string} ) {
     const [metaData, setMetaData] = useState({});
 
@@ -19,12 +17,6 @@ function Photo({ src }: { src: string} ) {
             allMetaData["width"] = img.width;
             allMetaData["height"] = img.height;
             setMetaData(allMetaData);
-            console.log(allMetaData);
-            // Convert the shutter speed to milliseconds
-            var shutterSpeed = allMetaData.ExposureTime;
-            var shutterSpeedMs = 1 / shutterSpeed;
-            console.log(src);
-            console.log(shutterSpeedMs);
         });
     }, [])
 
