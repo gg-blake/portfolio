@@ -106,7 +106,7 @@ function ProjectItem({ date, title, desc, href, location, tags }: ProjectEntry) 
                     <span className="flex flex-row items-center gap-3"><svg className="fill-white" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M480.068-485.385q29.855 0 51.047-21.26 21.192-21.26 21.192-51.115t-21.26-51.047q-21.26-21.192-51.115-21.192t-51.047 21.26q-21.192 21.26-21.192 51.115t21.26 51.047q21.26 21.192 51.115 21.192ZM480-179.461q117.384-105.076 179.654-201.577 62.269-96.5 62.269-169.039 0-109.384-69.5-179.846T480-800.385q-102.923 0-172.423 70.462t-69.5 179.846q0 72.539 62.269 169.039Q362.616-284.537 480-179.461Zm0 79.844Q329.001-230.463 253.539-343.154q-75.461-112.692-75.461-206.923 0-138.46 89.577-224.191Q357.231-859.999 480-859.999t212.345 85.731q89.577 85.731 89.577 224.191 0 94.231-75.461 206.923Q630.999-230.463 480-99.617Zm0-458.075Z"/></svg>
                     <h3 className="p-0 m-0">{location}</h3></span>
                 </span>
-                <span className='flex flex-wrap text-[.6rem] gap-3'>{
+                <span className='flex flex-wrap text-[.6rem] gap-1'>{
                     tags.map((tag) => <span className="border-[1px] border-[white] rounded-sm px-[3px] leading-none py-[2px]">{tag}</span>)
                 }</span>
             </span>
@@ -178,14 +178,16 @@ export default function Projects() {
             setInView(negative);
             
         })
-        containerRef.current.addEventListener("wheel", (e) => {
-            if (!containerRef.current) return;
+        containerRef.current.addEventListener("mouseover", (e) => {
             e.preventDefault();
-            const forcedScrollSpeed = 1.3;
-            const scrollSpeed = containerRef.current.getBoundingClientRect().height * (e.deltaY * forcedScrollSpeed / containerRef.current.scrollHeight);
-            console.log(containerRef.current.getBoundingClientRect().top);
-            window.scroll({top: window.scrollY + scrollSpeed, behavior: "smooth"});
-            containerRef.current.scroll({top: containerRef.current.scrollTop + e.deltaY * (forcedScrollSpeed * 2), behavior: "smooth"});
+            
+        }, {passive: false})
+        window.addEventListener("scroll", (e) => {
+            if (!containerRef.current) return;
+            const containerTopStatic = -(document.getElementById("project-container")?.getBoundingClientRect().top) / document.getElementById("project-container").clientHeight;
+            console.log(containerTopStatic);
+            containerRef.current.scroll({top: containerTopStatic * containerRef.current.scrollHeight, behavior: "smooth"});
+            
         }, {passive: false})
     }, [])
 
@@ -207,26 +209,28 @@ export default function Projects() {
     }
     
     return (
-        <div className='flex flex-col relative p-3'>
-        <div style={{height: `${(EXAMPLEPROJECT.length - 1) * 88 + 486}px`}} ref={containerRef} className="w-full h-[752px] overflow-y-scroll grid grid-cols-1 gap-3 relative">
-            
-            
-            { EXAMPLEPROJECT.map((currentYear, i) => {
-                return (
-                    <YearContainer year={currentYear.year} order={i} length={EXAMPLEPROJECT.length}>{
-                        currentYear.content.map((currentProjectItem, j) => <ProjectItem {...currentProjectItem} />)
-                    }</YearContainer>
-                )
-            }) }
-            
-            
-        </div>
-        <div style={{transform: `translateY(-${inView.length * 86}px)`}} className="w-full h-auto flex flex-col justify-end z-50">
-        {
-            inView.map((item: any) => <HiddenProjectItem year={item.year} />)
-        }
-        
-        </div>
+        <div style={{height: EXAMPLEPROJECT.length * 500 + 300}} id="project-container" className="w-full h-[2000px] flex flex-col">
+            <div className='flex flex-col sticky p-3 top-3'>
+                <div style={{height: `${(EXAMPLEPROJECT.length - 1) * 88 + 486}px`}} ref={containerRef} className="w-full h-[752px] overflow-y-scroll grid grid-cols-1 gap-3 relative pointer-events-none">
+                    
+                    
+                    { EXAMPLEPROJECT.map((currentYear, i) => {
+                        return (
+                            <YearContainer year={currentYear.year} order={i} length={EXAMPLEPROJECT.length}>{
+                                currentYear.content.map((currentProjectItem, j) => <ProjectItem {...currentProjectItem} />)
+                            }</YearContainer>
+                        )
+                    }) }
+                    
+                    
+                </div>
+                <div style={{transform: `translateY(-${inView.length * 86}px)`}} className="w-full h-auto flex flex-col justify-end z-50">
+                {
+                    inView.map((item: any) => <HiddenProjectItem year={item.year} />)
+                }
+                
+                </div>
+            </div>
         </div>
     )
 }
