@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import EXIF from "exif-js";
+import GlitchTitle from "./glitch_text";
 
-const photosList = ["4792", "4819", "4865", "4886", "4891", "5008", "5010", "5054", "5092", "5147", "5149", "5153"]
-    .map((id) => `/IMG_${id}.jpg`);
+const photosList = ["4792", "4819", "4865", "4886", "4891", "5008", "5010", "5054", "5092", "5147", "5149", "5153", "5235", "5189", "5197", "5202", "5206", "5211", "5212", "5215", "5216", "5227"]
+    .map((id) => `/IMG_${id}.JPG`);
 
 function Photo({ src }: { src: string} ) {
     const [metaData, setMetaData] = useState({});
@@ -58,16 +59,22 @@ export default function Photobook() {
         imgLists[i % columns].push(src);
     }
 
-    return <div className="w-screen grid grid-cols-3 gap-6 p-3">
-        
-        {imgLists.map((photos: string[]) => (
-            <div className="flex flex-col w-full gap-3">
-                {
-                    photos.map((photo: string) => (
-                        <Photo src={photo} />
-                    ))
-                }
+    return (
+        <div className="flex flex-col gap-3 p-3 mt-12">
+            <div className="sticky top-[calc(70px+.75rem)] p-3 border-white border-[1px] box-border z-[900] bg-black">
+                <GlitchTitle>Photos</GlitchTitle>
             </div>
-        ))}
-    </div>
+            <div className="w-full grid grid-cols-3 gap-6">
+                {imgLists.map((photos: string[]) => (
+                    <div className="flex flex-col w-full gap-3">
+                        {
+                            photos.map((photo: string) => (
+                                <Photo src={photo} />
+                            ))
+                        }
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
 }

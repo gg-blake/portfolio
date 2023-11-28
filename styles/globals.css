@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html {
+  width: 100vw;
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 @layer base {
   :root {
     --color-primary-50: 207deg 100% 94%;

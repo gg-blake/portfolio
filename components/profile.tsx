@@ -1,5 +1,7 @@
 import styles from '../styles/Home.module.css'
-import MovingBanner from './moving_banner'
+import FlowFieldBG from './flow_field';
+import MovingBannerFrame from './moving_banner';
+
 import { useEffect } from 'react'
 
 export default function Profile() {
@@ -11,7 +13,10 @@ export default function Profile() {
     }, [])
     const screenbanner = "This website was meticulously designed and developed by me. To learn more about the technologies and programs used in the project, take a minute to check out my Github.".split(" ");
     return (
-        <div className={`w-screen h-screen flex items-center pb-[20vh] pl-0 md:pl-2 justify-center md:justify-start overflow-hidden`}>
+        <div className={`w-screen h-screen flex items-center pb-[20vh] p-3 justify-center md:justify-start overflow-hidden`}>
+            <FlowFieldBG />
+            <MovingBannerFrame/>
+            
             <div className="w-full max-w-sm flex flex-col items-center md:items-start gap-5">
                 <div className='w-auto h-auto flex items-center gap-x-0 md:gap-x-4'>
                     <div className='relative w-[50vw] h-[50vw] max-h-[320px] mb-[50px] md:mb-0 max-w-[320px] flex justify-center items-center overflow-clip rounded-full'>

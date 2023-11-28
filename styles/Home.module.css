@@ -4,6 +4,68 @@
   transform: translate(0, 0);
 }
 
+.swayingimage1 {
+  animation: verticalOrbit 3s ease-in-out infinite both;
+  transform: translate(0, 0);
+}
+
+@keyframes verticalOrbit {
+  0% {
+    transform: translate(0, 30px);
+    border-color: gray;
+    color: gray;
+    z-index: 30;
+  }
+  25% {
+    border-color: white;
+    color: white;
+  }
+  50% {
+    transform: translate(20px, -90px);
+    z-index: 0;
+    border-color: white;
+    color: white;
+  }
+  75% {
+    border-color: gray;
+    color: gray;
+    
+  }
+  100% {
+    transform: translate(0, 30px);
+    border-color: gray;
+    color: gray;
+    z-index: 0;
+  }
+}
+
+@keyframes depth {
+  from {
+    z-index: 0;
+  }
+  to {
+
+  }
+}
+
+@keyframes sway1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 0);
+  }
+}
+ 
+@keyframes sway2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-10px, 0);
+  }
+}
+
 @keyframes shake {
   91%, 99% {
     transform: translate(-1px, 0);
