@@ -1,15 +1,4 @@
-import { FC, useLayoutEffect, useRef, useEffect, useState } from 'react'
-import styles from '../styles/MovingBanner.module.css'
-
-interface MovingWordProps {
-    value: string;
-}
-
-function MovingSentence() {
-    return (
-        <div></div>
-    )
-}
+import { useRef, useEffect, useState } from 'react'
 
 interface MovingBannerProps {
     children: string;
@@ -42,7 +31,7 @@ function MovingBanner({children}: MovingBannerProps) {
 
 
     return (
-        <div ref={bannerContainerRef} className="relative w-[200px] h-[30px] overflow-clip shadow-md  bg-black box-border">
+        <div ref={bannerContainerRef} className="relative w-[200px] h-[30px] overflow-clip shadow-md bg-inherit box-border">
             <div ref={bannerContentRef} className="absolute left-0 whitespace-nowrap">{children}</div>
             <div ref={bannerContentSecondRef} className="absolute left-full whitespace-nowrap">{children}</div>
         </div>
@@ -61,12 +50,12 @@ const ESTIMATED_TEXT_LENGTH = 107.267;
 function MovingBannerResizeable(props: MovingBannerResizeableProps) {
     return (
         <div className={`${props.className} flex flex-row overflow-x-clip`}>
-            {[...Array(props.count)].map((_, i) => (<MovingBanner>{props.children}</MovingBanner>))}
+            {[...Array(props.count)].map((_, i) => (<MovingBanner key={`moving-banner-${i}`}>{props.children}</MovingBanner>))}
         </div>
     )
 }
 
-export default function MovingBannerFrame() {
+function MovingBannerFrame() {
     interface Size {
         width: number;
         height: number;
@@ -83,11 +72,13 @@ export default function MovingBannerFrame() {
 
     return (
         <div className="w-screen h-screen absolute top-0 left-0 overflow-clip leading-snug font-mono text-white">
-            <MovingBannerResizeable className="absolute text-[9px] bg-transparent origin-bottom bottom-0" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <MovingBannerResizeable className="top-0 absolute text-[9px] bg-transparent origin-center rotate-180" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <MovingBannerResizeable className="absolute text-[9px] bg-transparent origin-bottom-left rotate-90 translate-y-[-16px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <MovingBannerResizeable className="right-0 absolute text-[9px] bg-transparent origin-top-right rotate-[-90deg] translate-x-[-12px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
+            <MovingBannerResizeable className="absolute text-[9px] bg-black origin-bottom bottom-0" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
+            <MovingBannerResizeable className="top-0 absolute text-[9px] bg-black origin-center rotate-180" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
+            <MovingBannerResizeable className="absolute text-[9px] bg-black origin-bottom-left rotate-90 translate-y-[-16px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
+            <MovingBannerResizeable className="right-0 absolute text-[9px] bg-black origin-top-right rotate-[-90deg] translate-x-[-12px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
             <div className="w-[calc(100%_-_24px)] h-[calc(100%_-_24px)] absolute left-[12px] top-[12px] border-[1px] border-white"></div>
         </div>
     )
 }
+
+export { MovingBannerFrame, MovingBannerResizeable };

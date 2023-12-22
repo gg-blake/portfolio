@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useEffect, useState } from "react";
 import EXIF from "exif-js";
 import GlitchTitle from "./glitch_text";
@@ -60,16 +61,16 @@ export default function Photobook() {
     }
 
     return (
-        <div className="flex flex-col gap-3 p-3 mt-12">
+        <div className="flex flex-col gap-3 p-3">
             <div className="sticky top-[calc(70px+.75rem)] p-3 border-white border-[1px] box-border z-[900] bg-black">
                 <GlitchTitle>Photos</GlitchTitle>
             </div>
             <div className="w-full grid grid-cols-3 gap-6">
-                {imgLists.map((photos: string[]) => (
-                    <div className="flex flex-col w-full gap-3">
+                {imgLists.map((photos: string[], i: number) => (
+                    <div key={`photo-column-${i}`} className="flex flex-col w-full gap-3">
                         {
-                            photos.map((photo: string) => (
-                                <Photo src={photo} />
+                            photos.map((photo: string, j: number) => (
+                                <Photo key={`photo-${i}-${j}`} src={photo} />
                             ))
                         }
                     </div>

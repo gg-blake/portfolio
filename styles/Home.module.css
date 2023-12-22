@@ -1,3 +1,5 @@
+
+
 .title {
   animation: shake 8.2s cubic-bezier(.36,.07,.19,.97) infinite both;
   z-index: 5;
@@ -7,6 +9,11 @@
 .swayingimage1 {
   animation: verticalOrbit 3s ease-in-out infinite both;
   transform: translate(0, 0);
+}
+
+.flow-clip {
+  clip-path: url(#myClip);
+
 }
 
 @keyframes verticalOrbit {
@@ -187,5 +194,39 @@
   }
   100% {
     transform: translate(0, 0) rotate(-270deg);
+  }
+}
+
+.cursorblink {
+  animation: cursor 1.5s infinite;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.specialmask {
+  transform-origin: center;
+  transform: translateY(-1000px);
+  animation: orbitx 3s cubic-bezier(.36,.07,.19,.97) infinite;
+}
+
+@keyframes orbitx {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-400px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

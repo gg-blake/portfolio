@@ -1,8 +1,14 @@
 import styles from '../styles/Home.module.css'
 import FlowFieldBG from './flow_field';
-import MovingBannerFrame from './moving_banner';
+import GlitchTitle from './glitch_text';
+import {MovingBannerFrame} from './moving_banner';
+import Spline from '@splinetool/react-spline';
+import PROFILE_BG from '../public/profile-cropped.jpg';
 
 import { useEffect } from 'react'
+import ColorBlendButton from './colorblendbutton';
+
+
 
 export default function Profile() {
     const animationDuration = 20;
@@ -13,38 +19,24 @@ export default function Profile() {
     }, [])
     const screenbanner = "This website was meticulously designed and developed by me. To learn more about the technologies and programs used in the project, take a minute to check out my Github.".split(" ");
     return (
-        <div className={`w-screen h-screen flex items-center pb-[20vh] p-3 justify-center md:justify-start overflow-hidden`}>
+        <div className={`w-screen h-screen flex items-center p-3 justify-center overflow-clip`}>
             <FlowFieldBG />
             <MovingBannerFrame/>
             
-            <div className="w-full max-w-sm flex flex-col items-center md:items-start gap-5">
-                <div className='w-auto h-auto flex items-center gap-x-0 md:gap-x-4'>
-                    <div className='relative w-[50vw] h-[50vw] max-h-[320px] mb-[50px] md:mb-0 max-w-[320px] flex justify-center items-center overflow-clip rounded-full'>
-                        <img src="/profile-cropped.jpg" className="w-[384px] h-[384px] object-cover object-center" alt="profile-cropped.jpg" />
-                    </div>
-                    <div className="absolute translate-y-[-25px] md:translate-y-0 origin-center">
-                        <img src="/circular-banner.svg" className={`${styles.circularbanner} fill-neutral-400 w-[50vw] h-[50vw] max-h-[320px] max-w-[320px] scale-105 origin-center`} alt='banner' />
-                    </div>
-                    <div className="flex flex-col w-0 gap-4 md:w-auto text-center md:text-start items-center md:items-start mt-[calc(150%_+_30px)] md:mt-0 translate-x-[-25vw] md:translate-x-0">
-                        <span className="relative  font-medium text-4xl md:text-6xl lg:text-8xl  flex justify-center md:justify-start ">
-                            <h1 className={`${styles.title} z-40 whitespace-nowrap`}>Blake Moody</h1>
-                            <h1 className={`${styles.afterimage1} absolute bottom-0 md:top-0 z-0 whitespace-nowrap`}>Blake Moody</h1>
-                            <h1 className={`${styles.afterimage2} absolute bottom-0 md:top-0 z-0 whitespace-nowrap`}>Blake Moody</h1>
-                            <h1 className={`${styles.afterimage3} absolute bottom-0 md:top-0 z-0 whitespace-nowrap`}>Blake Moody</h1>
-                        </span>
-                        <div className="grid grid-cols-[20px_auto] gap-x-3 gap-y-1 text-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960"  className='w-full h-auto fill-neutral-400'><path d="M149-135q-39.05 0-66.525-27.475Q55-189.95 55-229v-502q0-39.463 27.475-67.231Q109.95-826 149-826h662q39.463 0 67.231 27.769Q906-770.463 906-731v502q0 39.05-27.769 66.525Q850.463-135 811-135H149Zm662-518L506.099-448.032Q499.188-444 493.094-442 487-440 480-440q-7 0-13.094-2-6.094-2-13.005-6.032L149-653v424h662v-424ZM480-513l327-218H154l326 218ZM149-653v10-54.821 1.065V-731v34-1.912V-643v-10 424-424Z"/></svg>
-                            <a href="blake@moody.mx" className='font-normal text-sm text-neutral-400 p-0 m-0 hover:underline underline-offset-2'>blake@moody.mx</a>
-                            <svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto fill-neutral-400"><g><path d="M127.999746,23.06353 C162.177385,23.06353 166.225393,23.1936027 179.722476,23.8094161 C192.20235,24.3789926 198.979853,26.4642218 203.490736,28.2166477 C209.464938,30.5386501 213.729395,33.3128586 218.208268,37.7917319 C222.687141,42.2706052 225.46135,46.5350617 227.782844,52.5092638 C229.535778,57.0201472 231.621007,63.7976504 232.190584,76.277016 C232.806397,89.7746075 232.93647,93.8226147 232.93647,128.000254 C232.93647,162.177893 232.806397,166.225901 232.190584,179.722984 C231.621007,192.202858 229.535778,198.980361 227.782844,203.491244 C225.46135,209.465446 222.687141,213.729903 218.208268,218.208776 C213.729395,222.687649 209.464938,225.461858 203.490736,227.783352 C198.979853,229.536286 192.20235,231.621516 179.722476,232.191092 C166.227425,232.806905 162.179418,232.936978 127.999746,232.936978 C93.8200742,232.936978 89.772067,232.806905 76.277016,232.191092 C63.7971424,231.621516 57.0196391,229.536286 52.5092638,227.783352 C46.5345536,225.461858 42.2700971,222.687649 37.7912238,218.208776 C33.3123505,213.729903 30.538142,209.465446 28.2166477,203.491244 C26.4637138,198.980361 24.3784845,192.202858 23.808908,179.723492 C23.1930946,166.225901 23.0630219,162.177893 23.0630219,128.000254 C23.0630219,93.8226147 23.1930946,89.7746075 23.808908,76.2775241 C24.3784845,63.7976504 26.4637138,57.0201472 28.2166477,52.5092638 C30.538142,46.5350617 33.3123505,42.2706052 37.7912238,37.7917319 C42.2700971,33.3128586 46.5345536,30.5386501 52.5092638,28.2166477 C57.0196391,26.4642218 63.7971424,24.3789926 76.2765079,23.8094161 C89.7740994,23.1936027 93.8221066,23.06353 127.999746,23.06353 M127.999746,0 C93.2367791,0 88.8783247,0.147348072 75.2257637,0.770274749 C61.601148,1.39218523 52.2968794,3.55566141 44.1546281,6.72008828 C35.7374966,9.99121548 28.5992446,14.3679613 21.4833489,21.483857 C14.3674532,28.5997527 9.99070739,35.7380046 6.71958019,44.1551362 C3.55515331,52.2973875 1.39167714,61.6016561 0.769766653,75.2262718 C0.146839975,88.8783247 0,93.2372872 0,128.000254 C0,162.763221 0.146839975,167.122183 0.769766653,180.774236 C1.39167714,194.398852 3.55515331,203.703121 6.71958019,211.845372 C9.99070739,220.261995 14.3674532,227.400755 21.4833489,234.516651 C28.5992446,241.632547 35.7374966,246.009293 44.1546281,249.28042 C52.2968794,252.444847 61.601148,254.608323 75.2257637,255.230233 C88.8783247,255.85316 93.2367791,256 127.999746,256 C162.762713,256 167.121675,255.85316 180.773728,255.230233 C194.398344,254.608323 203.702613,252.444847 211.844864,249.28042 C220.261995,246.009293 227.400247,241.632547 234.516143,234.516651 C241.632039,227.400755 246.008785,220.262503 249.279912,211.845372 C252.444339,203.703121 254.607815,194.398852 255.229725,180.774236 C255.852652,167.122183 256,162.763221 256,128.000254 C256,93.2372872 255.852652,88.8783247 255.229725,75.2262718 C254.607815,61.6016561 252.444339,52.2973875 249.279912,44.1551362 C246.008785,35.7380046 241.632039,28.5997527 234.516143,21.483857 C227.400247,14.3679613 220.261995,9.99121548 211.844864,6.72008828 C203.702613,3.55566141 194.398344,1.39218523 180.773728,0.770274749 C167.121675,0.147348072 162.762713,0 127.999746,0 Z M127.999746,62.2703115 C91.698262,62.2703115 62.2698034,91.69877 62.2698034,128.000254 C62.2698034,164.301738 91.698262,193.730197 127.999746,193.730197 C164.30123,193.730197 193.729689,164.301738 193.729689,128.000254 C193.729689,91.69877 164.30123,62.2703115 127.999746,62.2703115 Z M127.999746,170.667175 C104.435741,170.667175 85.3328252,151.564259 85.3328252,128.000254 C85.3328252,104.436249 104.435741,85.3333333 127.999746,85.3333333 C151.563751,85.3333333 170.666667,104.436249 170.666667,128.000254 C170.666667,151.564259 151.563751,170.667175 127.999746,170.667175 Z M211.686338,59.6734287 C211.686338,68.1566129 204.809755,75.0337031 196.326571,75.0337031 C187.843387,75.0337031 180.966297,68.1566129 180.966297,59.6734287 C180.966297,51.1902445 187.843387,44.3136624 196.326571,44.3136624 C204.809755,44.3136624 211.686338,51.1902445 211.686338,59.6734287 Z"></path></g></svg>
-                            <a href="https://www.instagram.com/gg.blake_/" className='font-normal text-sm text-neutral-400 p-0 m-0 hover:underline underline-offset-2'>@gg.blake_</a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="w-full h-auto fill-neutral-400"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            <a href="https://www.linkedin.com/in/blake-moody-2626ba11b/" className='font-normal text-sm text-neutral-400 p-0 m-0 hover:underline underline-offset-2'>Blake Moody</a>
-                            <svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto fill-neutral-400"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)"/></svg>
-                            <a href="https://github.com/gg-blake" className='font-normal text-sm text-neutral-400 p-0 m-0  hover:underline underline-offset-2'>gg-blake</a>
-                        </div>
-                    </div>
+            <div className="w-full h-full flex flex-col items-center justify-center z-10">
+                <div style={{backgroundImage: `url('${PROFILE_BG.src}')`}} className="relative w-[calc(min(50vw,_50vh))] h-[calc(min(50vw,_50vh))] bg-[#444444] flex flex-col items-center justify-center bg-[length:400px_400px] bg-center rounded-full">
+                    <GlitchTitle className='font-semibold text-5xl sm:text-8xl mix-blend-exclusion'>Blake Moody</GlitchTitle>
+                    <img className={`absolute w-full h-full origin-center scale-[104%] ${styles.circularbanner}`} src="/circular-banner.svg" />
+                </div>
+                
+                <div className="absolute bottom-3 grid grid-cols-2 grid-rows-2 w-[250px] h-auto text-sm gap-3">
+                    <ColorBlendButton className="relative">Instagram</ColorBlendButton>
+                    <ColorBlendButton className="relative">Github</ColorBlendButton>
+                    <ColorBlendButton className="relative">LinkedIn</ColorBlendButton>
+                    <ColorBlendButton className="relative">Email</ColorBlendButton>
                 </div>
             </div>
+            
       </div>
     )
 }
