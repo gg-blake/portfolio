@@ -1,5 +1,0 @@
-{
-  "http://joeiddon.github.io/perlin/perlin.js": { "resolved": "https://joeiddon.github.io/perlin/perlin.js", "integrity": "sha512-VcAnrnG+f/0oYUog2Oqj0vsKJb4PIR0MUpthaZdQQZosKZYuQumvw8XPX96vsvD8VLiJ+iAxGhhCv5EkmtwE4Q==", "contentType": "application/javascript; charset=utf-8" },
-  "https://git.io/perlin.js": { "resolved": "https://joeiddon.github.io/perlin/perlin.js", "integrity": "sha512-VcAnrnG+f/0oYUog2Oqj0vsKJb4PIR0MUpthaZdQQZosKZYuQumvw8XPX96vsvD8VLiJ+iAxGhhCv5EkmtwE4Q==", "contentType": "application/javascript; charset=utf-8" },
-  "version": 1
-}
