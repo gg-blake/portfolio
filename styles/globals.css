@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  width: 100vw;
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer base {
+  :root {
+    --color-primary-50: 207deg 100% 94%;
+    --color-primary-100: 207deg 100% 86%;
+    --color-primary-200: 206deg 100% 76%;
+    --color-primary-300: 204deg 100% 64%;
+    --color-primary-400: 201deg 100% 50%;
+    --color-primary-500: 205deg 100% 50%;
+    --color-primary-600: 209deg 100% 50%;
+    --color-primary-700: 213deg 100% 50%;
+    --color-primary-800: 216deg 98% 47%;
+    --color-primary-900: 230deg 75% 46%;
+    --color-secondary: 111, 114, 185;
+    /* ... */
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
