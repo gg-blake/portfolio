@@ -382,7 +382,7 @@ function TimelineEvent(props: TimelineEntry) {
 export default function Timeline() {
 
     return (
-        <div id="scroll-container" className="w-screen h-auto p-3 flex flex-col gap-3 z-40">
+        <div id="timeline" className="w-screen h-auto p-3 flex flex-col gap-3 z-40">
             <div className="sticky top-[calc(70px+.75rem)] p-3 border-white border-[1px] box-border z-[900] bg-black">
                 <GlitchTitle>Timeline</GlitchTitle>
             </div>

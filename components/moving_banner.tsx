@@ -64,10 +64,10 @@ function MovingBannerFrame() {
 
     useEffect(() => {
         setWindowDimensions({width: window.innerWidth, height: window.innerHeight});
-        window.addEventListener('resize', () => {
+        /*window.addEventListener('resize', () => {
             if (window.scrollY > window.innerHeight) return;
             location.reload();
-        })
+        })*/
     }, [])
 
     return (

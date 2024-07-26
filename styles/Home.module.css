@@ -55,23 +55,7 @@
   }
 }
 
-@keyframes sway1 {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(10px, 0);
-  }
-}
- 
-@keyframes sway2 {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-10px, 0);
-  }
-}
+
 
 @keyframes shake {
   91%, 99% {
@@ -228,5 +212,27 @@
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+.aura1 {
+  color: #c43af2;
+  text-shadow: #c43af2 0 0 5px;
+  animation: rise 1.5s ease-in-out infinite;
+  bottom: 0;
+  opacity: 0;
+}
+
+@keyframes rise {
+  %0 {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(-100px);
+    opacity: 0;
   }
 }

@@ -147,10 +147,10 @@ function YearContainer({ children, year, order, length }: {children?: any, year:
 
 export default function Projects() {
     return (
-        <div  id="project-container" className="w-full h-auto flex flex-col p-3 relative gap-3 z-40">
+        <div  id="projects" className="w-full h-auto flex flex-col p-3 relative gap-3 z-40">
             <div className="sticky top-[calc(70px+.75rem)] z-[900]">
                 <div className='p-3 border-white border-[1px] box-border bg-black'>
-                    <GlitchTitle>Projects</GlitchTitle>
+                    <GlitchTitle auraText='作品'>Projects</GlitchTitle>
                 </div>
             </div>
             {EXAMPLEPROJECT.map((currentYear, i) => {
