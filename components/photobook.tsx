@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 import EXIF from "exif-js";
 import GlitchTitle from "./glitch_text";
 
+const photos = [
+    {
+        id: "",
+        date: "",
+        location: ""
+    }
+]
+
 const photosList = ["4792", "4819", "4865", "4886", "4891", "5008", "5010", "5054", "5092", "5147", "5149", "5153", "5235", "5189", "5197", "5202", "5206", "5211", "5212", "5215", "5216", "5227"]
     .map((id) => `/IMG_${id}.JPG`);
 
@@ -61,7 +69,7 @@ export default function Photobook() {
     }
 
     return (
-        <div className="flex flex-col gap-3 p-3">
+        <div id="photos" className="flex flex-col gap-3 p-3">
             <div className="sticky top-[calc(70px+.75rem)] p-3 border-white border-[1px] box-border z-[900] bg-black">
                 <GlitchTitle>Photos</GlitchTitle>
             </div>
