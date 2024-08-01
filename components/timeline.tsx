@@ -167,11 +167,7 @@ const EXAMPLETIMELINE: TimelineEntry[] = [
     },
     {
         "title": "UMass Boston IT Help Desk",
-<<<<<<< Updated upstream
-        "subtitle": "University of Massachusetts Boston",
-=======
         "subtitle": "Boston",
->>>>>>> Stashed changes
         "location": "Boston, MA",
         "startDate": "2021-09-30",
         "endDate": "2025-05-01",
@@ -218,7 +214,7 @@ function DateNode({ date  }: { date: string }) {
 
     return (
         <span className="flex flex-row px-3 py-[1px] items-center justify-start gap-1">
-            <svg className="fill-white" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M212.309-100.001q-30.308 0-51.308-21t-21-51.308v-535.382q0-30.308 21-51.308t51.308-21h55.385v-84.615h61.537v84.615h303.076v-84.615h59.999v84.615h55.385q30.308 0 51.308 21t21 51.308v535.382q0 30.308-21 51.308t-51.308 21H212.309Zm0-59.999h535.382q4.616 0 8.463-3.846 3.846-3.847 3.846-8.463v-375.382H200v375.382q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846Z"/></svg>
+            <svg className="fill-primary-50" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M212.309-100.001q-30.308 0-51.308-21t-21-51.308v-535.382q0-30.308 21-51.308t51.308-21h55.385v-84.615h61.537v84.615h303.076v-84.615h59.999v84.615h55.385q30.308 0 51.308 21t21 51.308v535.382q0 30.308-21 51.308t-51.308 21H212.309Zm0-59.999h535.382q4.616 0 8.463-3.846 3.846-3.847 3.846-8.463v-375.382H200v375.382q0 4.616 3.846 8.463 3.847 3.846 8.463 3.846Z"/></svg>
             {formatDate(date)}
         </span>
     )
@@ -320,9 +316,9 @@ interface TimelineEntry {
 function EventCounter({count, bubbleSize, maxItems=3, spacingX=10, spacingY=0}: {count: number, bubbleSize: number, maxItems: number, spacingX: number, spacingY: number, }) {
     const bubbleList = [];
     for (let i = 0; i < Math.min(count, maxItems); i++) {
-        let currentBubble = <div style={{width: `${bubbleSize}px`, height: `${bubbleSize}px`, left: `${i * spacingX}px`, top: `${i * spacingY}px`}} className={`absolute bg-black border-white border-[1px] box-border rounded-full shadow-md`}></div>;
+        let currentBubble = <div style={{width: `${bubbleSize}px`, height: `${bubbleSize}px`, left: `${i * spacingX}px`, top: `${i * spacingY}px`}} className={`absolute bg-primary-950 border-primary-50 border-[1px] box-border rounded-full shadow-md`}></div>;
         if (count > maxItems && i === maxItems - 1) {
-            currentBubble = <div style={{width: `${bubbleSize}px`, height: `${bubbleSize}px`, left: `${i * spacingX}px`, top: `${i * spacingY}px`}} className={`absolute bg-black border-white border-[1px] box-border rounded-full flex flex-row items-center justify-center shadow-md`}>+{count - maxItems + 1}</div>;
+            currentBubble = <div style={{width: `${bubbleSize}px`, height: `${bubbleSize}px`, left: `${i * spacingX}px`, top: `${i * spacingY}px`}} className={`absolute bg-primary-950 border-primary-50 border-[1px] box-border rounded-full flex flex-row items-center justify-center shadow-md`}>+{count - maxItems + 1}</div>;
         }
         bubbleList.push(currentBubble);
     }
@@ -334,29 +330,9 @@ function EventCounter({count, bubbleSize, maxItems=3, spacingX=10, spacingY=0}: 
     )
 }
 
-<<<<<<< Updated upstream
-function EventContents({events}: {events: TimelineEntryEvent[]}) {
-    function EventItem({event}: {event: TimelineEntryEvent}) {
-        return (
-            <div className="flex flex-col border-white border-[1px] min-w-[calc(min(100%,400px))] mt-3">
-                <div className="w-full h-[10px] bg-white"></div>
-                <div className="p-3 w-full">
-                <h2 className="text-base font-medium leading-tight">{event.title}</h2>
-                <h3 className="text-base font-normal leading-tight">{event.subtitle}</h3>
-                <div className="mt-2 flex flex-wrap text-[.6rem] gap-1">{event.tags.map((tag, i) => <span key={`event-tag-${i}`} className="border-[1px] border-[white] rounded-sm px-[3px] leading-none py-[2px]">{tag}</span>)}</div>
-                <div className="mt-2 text-sm leading-none font-medium underline">Description</div>
-                <div className="text-sm leading-tight">{event.description}</div>
-                </div>
-            </div>
-        )
-    }
-
-    const [toggle, setToggle] = useState(false);
-=======
 function EventItem({event, index, focusedEvent, onClick, onReset}: {event: TimelineEntryEvent, index: number, focusedEvent: number, onClick: () => void, onReset: () => void}) {
     const visibility = (focusedEvent == index || focusedEvent == -1) ? "visible" :  "hidden";
     const height = focusedEvent == index ? "100%" : "auto";
->>>>>>> Stashed changes
 
     useEffect(() => {
         if (index == focusedEvent) {
@@ -378,10 +354,6 @@ function EventItem({event, index, focusedEvent, onClick, onReset}: {event: Timel
             <div className="hidden absolute border-t-[10px] border-primary-50 right-0 top-0 w-[30px] h-full group-hover:opacity-[1] opacity-0 transition-opacity md:visible md:flex justify-center items-center">
                 <svg className="fill-primary-50 transition-all" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
             </div>
-<<<<<<< Updated upstream
-            <div onClick={() => setToggle(!toggle)} className="mt-3"><div className="inline-block justify-center items-center p-3 text-xl border-[1px] border-white hover:underline no-underline">{toggle ? "Show Less" : "Show More"}</div></div>
-        </div>
-=======
             {index == focusedEvent && <p className="text-sm font-normal text-left sm:text-justify">{event.description}</p>}
             {index == focusedEvent && <div onClick={focusedEvent != -1 ? onReset : undefined} className="group p-[2px] border-[1px] border-primary-50 inline-block mt-3 active:bg-primary-50 transition-colors">
                 <svg className="fill-primary-50 transition-all group-active:fill-primary-950" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
@@ -390,7 +362,6 @@ function EventItem({event, index, focusedEvent, onClick, onReset}: {event: Timel
             </div>
         }
         </>
->>>>>>> Stashed changes
     )
 }
 
@@ -398,17 +369,6 @@ function TimelineEvent(props: TimelineEntry, key: string) {
     const [focusedEvent, setFocusedEvent] = useState<number>(-1);
 
     return (
-<<<<<<< Updated upstream
-        <div className="w-full h-auto p-3 box-border border-[1px] border-white">
-            <div className="h-[21px] w-full mb-3">
-                <Flow startDate={props.startDate} endDate={props.endDate} height={10} width={100} />
-            </div>
-            <h1 className="text-white text-4xl leading-tight">{props.title}</h1>
-            <h2 className="text-white text-sm leading-none">{props.subtitle}</h2>
-            
-            <div className="text-sm leading-tight font-semibold underline mt-3">Description</div>
-            <div className="text-sm leading-tight">{props.description}</div>
-=======
         <div className="flex flex-col sm:flex-row gap-3">
             <div className="w-full sm:max-w-[400px] h-auto p-3 box-border border-[1px] border-primary-50 flex flex-col gap-[5px]">
                 <h2 className="text-primary-50 opacity-80 text-sm font-bold p-[3px] m-0">{props.subtitle}</h2>
@@ -417,7 +377,6 @@ function TimelineEvent(props: TimelineEntry, key: string) {
                 {props.events.length > 0 && <div className="mt-3"><EventCounter count={props.events.length} bubbleSize={30} maxItems={3} spacingX={15} spacingY={0} /></div>}
             </div>
             <div style={{maxWidth: focusedEvent != -1 ? "min(600px, 100%)" : "300px"}} className="w-auto h-auto max-w-full lg:max-w-[300px] flex flex-col gap-3">{props.events.map((event: TimelineEntryEvent, i: number) => <EventItem key={`event-item-${i}`} index={i} event={event} focusedEvent={focusedEvent} onClick={() => setFocusedEvent(i)} onReset={() => setFocusedEvent(-1)} />)}</div>
->>>>>>> Stashed changes
             
         </div>
     )
@@ -429,7 +388,7 @@ export default function Timeline() {
 
     return (
         <div id="timeline" className="w-screen h-auto p-3 flex flex-col gap-3 z-40">
-            <div className="sticky top-[calc(70px+.75rem)] p-3 border-white border-[1px] box-border z-[900] bg-black">
+            <div className="sticky top-[calc(70px+.75rem)] p-3 border-primary-50 border-[1px] box-border z-[900] bg-primary-950">
                 <GlitchTitle>Timeline</GlitchTitle>
             </div>
             { EXAMPLETIMELINE.map((entry: TimelineEntry, i: number) => <TimelineEvent key={`timeline-entry-${i}`} {...entry} /> )}

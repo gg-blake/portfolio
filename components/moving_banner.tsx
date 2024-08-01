@@ -71,14 +71,6 @@ function MovingBannerFrame() {
     }, [])
 
     return (
-<<<<<<< Updated upstream
-        <div className="w-screen h-screen absolute top-0 left-0 overflow-clip leading-snug font-mono text-white">
-            <MovingBannerResizeable className="absolute text-[9px] bg-black origin-bottom bottom-0" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <MovingBannerResizeable className="top-0 absolute text-[9px] bg-black origin-center rotate-180" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <MovingBannerResizeable className="absolute text-[9px] bg-black origin-bottom-left rotate-90 translate-y-[-16px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <MovingBannerResizeable className="right-0 absolute text-[9px] bg-black origin-top-right rotate-[-90deg] translate-x-[-12px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>Hello, my name is Blake.</MovingBannerResizeable>
-            <div className="w-[calc(100%_-_24px)] h-[calc(100%_-_24px)] absolute left-[12px] top-[12px] border-[1px] border-white"></div>
-=======
         <div className="w-screen h-screen absolute top-0 left-0 overflow-clip leading-snug font-mono text-primary-50">
             <MovingBannerResizeable className="absolute text-[9px] bg-primary-950 origin-bottom bottom-0" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>This website was meticulously designed and developed by me. To learn more about the technologies and programs used in the project, take a minute to check out my Github.</MovingBannerResizeable>
             <MovingBannerResizeable className="top-0 absolute text-[9px] bg-primary-950 origin-center rotate-180" length={windowDimensions.width} count={Math.ceil(windowDimensions.width / ESTIMATED_TEXT_LENGTH)}>This website was meticulously designed and developed by me. To learn more about the technologies and programs used in the project, take a minute to check out my Github.</MovingBannerResizeable>
@@ -86,7 +78,6 @@ function MovingBannerFrame() {
             <MovingBannerResizeable className="right-0 absolute text-[9px] bg-primary-950 origin-top-right rotate-[-90deg] translate-x-[-12px]" length={windowDimensions.height} count={Math.ceil(windowDimensions.height / ESTIMATED_TEXT_LENGTH)}>This website was meticulously designed and developed by me. To learn more about the technologies and programs used in the project, take a minute to check out my Github.</MovingBannerResizeable>
             <div className="w-[calc(100%_-_24px)] h-[calc(100%_-_24px)] absolute left-[12px] top-[12px] border-[1px] border-primary-50"></div>
             <div className="w-full h-full absolute left-0 top-0 border-b-[1px] border-primary-50"></div>
->>>>>>> Stashed changes
         </div>
     )
 }

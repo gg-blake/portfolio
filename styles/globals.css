@@ -21,16 +21,17 @@ html {
 
 @layer base {
   :root {
-    --color-primary-50: 207deg 100% 94%;
-    --color-primary-100: 207deg 100% 86%;
-    --color-primary-200: 206deg 100% 76%;
-    --color-primary-300: 204deg 100% 64%;
-    --color-primary-400: 201deg 100% 50%;
-    --color-primary-500: 205deg 100% 50%;
-    --color-primary-600: 209deg 100% 50%;
-    --color-primary-700: 213deg 100% 50%;
-    --color-primary-800: 216deg 98% 47%;
-    --color-primary-900: 230deg 75% 46%;
+    --color-primary-50:  0deg, 0%, 98%
+    --color-primary-100: 0deg, 0%, 96%
+    --color-primary-200: 0deg, 0%, 90%
+    --color-primary-300: 0deg, 0%, 83%
+    --color-primary-400: 0deg, 0%, 64%
+    --color-primary-500: 0deg, 0%, 45%
+    --color-primary-600: 0deg, 0%, 32%
+    --color-primary-700: 0deg, 0%, 25%
+    --color-primary-800: 0deg, 0%, 15%
+    --color-primary-900: 0deg, 0%, 9%
+    --color-primary-950: 0deg, 0%, 4%
     --color-secondary: 111, 114, 185;
     /* ... */
   }

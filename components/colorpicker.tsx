@@ -1,6 +1,6 @@
 // @ts-nocheck
 import "../styles/globals.css";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 const defaultColors = [
     0, 50, 90, 180
@@ -58,8 +58,12 @@ function ColorPickerButton(props: {hue: number, isDark?: boolean | undefined}) {
         root?.style.setProperty('--color-primary-50', `0deg, 0%, 4%`);
     }
 
+    useEffect(() => {
+        setDark();
+    }, [])
+
     return (
-        <div onClick={() => props.isDark == undefined ? changeColor(props.hue) : props.isDark == false ? setLight() : setDark()} style={{borderColor: `hsl(${props.hue}, ${props.isDark == false ? "0%" : "100%"}, ${props.isDark == true ? "0%" : "85%"})`}} className="sm:w-6 sm:h-6 rounded-full bg-transparent p-[2px] flex justify-center items-center">
+        <div onClick={() => props.isDark == undefined ? changeColor(props.hue) : props.isDark == false ? setLight() : setDark()} style={{borderColor: `hsl(${props.hue}, ${props.isDark == false ? "0%" : "100%"}, ${props.isDark == true ? "0%" : "85%"})`}} className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-transparent p-[2px] flex justify-center items-center">
             <div style={{backgroundColor: `hsl(${props.hue}, ${props.isDark == false ? "0%" : "100%"}, ${props.isDark == true ? "0%" : "85%"})`}} className="w-full h-full rounded-full transition-all" />
         </div>
     )
@@ -67,7 +71,7 @@ function ColorPickerButton(props: {hue: number, isDark?: boolean | undefined}) {
 
 function ColorPicker({ className } : { className?: string }) {
     return (
-        <div className={`relative flex gap-3 border-primary-50 border-[1px] p-[4px] ${className}`}>
+        <div className={`md:relative md:right-0 right-3 absolute flex flex-col md:flex-row gap-3 border-primary-50 border-[1px] p-[4px] ${className}`}>
             <ColorPickerButton key={`color-${0}`} hue={0} isDark={true} />
             <ColorPickerButton key={`color-${1}`} hue={0} isDark={false} />
             {defaultColors.map((color, i) => (
