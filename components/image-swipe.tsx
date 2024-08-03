@@ -37,6 +37,7 @@ export default function ImageSwipe({images, className=""}: {images?: string[], c
             console.log("center");
         }
         
+        
         setMouseHold(false);
     }
 
