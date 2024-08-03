@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className="overflow-x-hidden w-screen" lang="en">
       <body className={inter.className}>{children}</body>
     </html>
   );

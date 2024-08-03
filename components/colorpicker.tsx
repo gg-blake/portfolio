@@ -11,7 +11,7 @@ function ColorPickerButton(props: {hue: number, isDark?: boolean | undefined}) {
         const root = document.querySelector(':root');
         if (!root) return;
         console.log("Set color: " + hue);
-        root?.style.setProperty('--color-primary-50',  `${hue}, 70%, 68%`);
+        /*root?.style.setProperty('--color-primary-50',  `${hue}, 70%, 68%`);
         root?.style.setProperty('--color-primary-100', `${hue}, 70%, 66%`);
         root?.style.setProperty('--color-primary-200', `${hue}, 70%, 60%`);
         root?.style.setProperty('--color-primary-300', `${hue}, 70%, 53%`);
@@ -21,7 +21,18 @@ function ColorPickerButton(props: {hue: number, isDark?: boolean | undefined}) {
         root?.style.setProperty('--color-primary-700', `${hue}, 70%, 15%`);
         root?.style.setProperty('--color-primary-800', `${hue}, 70%, 15%`);
         root?.style.setProperty('--color-primary-900', `${hue}, 70%, 15%`);
-        root?.style.setProperty('--color-primary-950', `${hue}, 50%, 5%`);
+        root?.style.setProperty('--color-primary-950', `${hue}, 50%, 5%`);*/
+        root?.style.setProperty('--color-primary-950',  `${hue}, 70%, 88%`);
+        root?.style.setProperty('--color-primary-900', `${hue}, 70%, 86%`);
+        root?.style.setProperty('--color-primary-800', `${hue}, 70%, 80%`);
+        root?.style.setProperty('--color-primary-700', `${hue}, 70%, 73%`);
+        root?.style.setProperty('--color-primary-600', `${hue}, 70%, 54%`);
+        root?.style.setProperty('--color-primary-500', `${hue}, 70%, 35%`);
+        root?.style.setProperty('--color-primary-400', `${hue}, 70%, 35%`);
+        root?.style.setProperty('--color-primary-300', `${hue}, 70%, 35%`);
+        root?.style.setProperty('--color-primary-200', `${hue}, 70%, 35%`);
+        root?.style.setProperty('--color-primary-100', `${hue}, 70%, 35%`);
+        root?.style.setProperty('--color-primary-50', `${hue}, 50%, 25%`);
     }
 
     const setDark = () => {
