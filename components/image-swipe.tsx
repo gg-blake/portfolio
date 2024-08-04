@@ -1,4 +1,4 @@
-import { useState , useEffect , useCallback , useRef } from 'react'
+import { useState , useEffect , useCallback , useRef, MouseEvent , TouchEvent } from 'react'
 
 export default function ImageSwipe({images, className=""}: {images?: string[], className?: string}) {
     const [mouseHold, setMouseHold] = useState(false);
@@ -14,7 +14,6 @@ export default function ImageSwipe({images, className=""}: {images?: string[], c
         const opposite = deltaX;
         const adjacent = defaultBasePosition.y - e.clientY;
         const angle = Math.atan(opposite / adjacent) * (180 / Math.PI);
-        console.log(opposite, adjacent, angle);
         const pointer = document.getElementById('pointer');
         if (pointer) {
             pointer.style.transform = `rotate(${angle}deg)`;
@@ -22,12 +21,33 @@ export default function ImageSwipe({images, className=""}: {images?: string[], c
 
     }, [mouseHoldInitialPosition]);
 
-    const handleMouseDown = (e: any) => {
+    const handleTouchMove = useCallback((e: TouchEvent) => {
+        let deltaX = e.touches[0].clientX - mouseHoldInitialPosition.clientX;
+        let deltaY = e.touches[0].clientY - mouseHoldInitialPosition.clientY;
+        
+        if (!containerRef.current) return;
+        const defaultBasePosition = {x: containerRef.current.clientWidth * 0.5, y: containerRef.current.clientHeight};
+        const opposite = deltaX;
+        const adjacent = defaultBasePosition.y - e.touches[0].clientY;
+        const angle = Math.atan(opposite / adjacent) * (180 / Math.PI);
+        const pointer = document.getElementById('pointer');
+        if (pointer) {
+            pointer.style.transform = `rotate(${angle}deg)`;
+        }
+
+    }, [mouseHoldInitialPosition]);
+
+    const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
         setMouseHold(true);
         setMouseHoldInitialPosition({clientX: e.clientX, clientY: e.clientY});
     }
 
-    const handleMouseUp = (e: any) => {
+    const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+        setMouseHold(true);
+        setMouseHoldInitialPosition({clientX: e.touches[0].clientX, clientY: e.touches[0].clientY});
+    }
+
+    const handleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return;
         if (e.clientX < containerRef.current.clientWidth * 0.20) {
             console.log("left");
@@ -36,23 +56,41 @@ export default function ImageSwipe({images, className=""}: {images?: string[], c
         } else {
             console.log("center");
         }
-        
-        
+
+        setMouseHold(false);
+    }
+
+    const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+        if (!containerRef.current) return;
+        if (e.touches[0].clientX < containerRef.current.clientWidth * 0.20) {
+            console.log("left");
+        } else if (e.touches[0].clientX > containerRef.current.clientWidth * 0.80) {
+            console.log("right");
+        } else {
+            console.log("center");
+        }
+
         setMouseHold(false);
     }
 
     useEffect(() => {
         if (mouseHold) {
+            // @ts-ignore
             window.addEventListener('mousemove', handleMouseMove, true);
+            // @ts-ignore
+            window.addEventListener('touchmove', handleTouchMove, true);
         } else {
+            // @ts-ignore
             window.removeEventListener('mousemove', handleMouseMove, true);
+            // @ts-ignore
+            window.addEventListener('touchmove', handleTouchMove, true);
         }
     }, [mouseHold])
 
     return (
-        <div className="w-screen h-screen bg-red-500 p-3 overflow-clip mb-[200px]">
-            <div ref={containerRef} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)} onMouseLeave={(e) => handleMouseUp(e)} className="w-full h-full border-primary-50 bg-primary-950 border-[1px] flex items-end justify-center overflow-x-hidden">
-                <div id="pointer" className='overflow-hidden absolute w-full h-full bg-blue-500 origin-bottom pointer-events-none transition-transform'></div>
+        <div className="w-screen h-screen p-3 overflow-clip mb-[200px]">
+            <div ref={containerRef} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)} onMouseLeave={(e) => handleMouseUp(e)} onTouchStart={(e) => handleTouchStart((e))} onTouchEnd={(e) => handleTouchEnd(e)} className="w-[calc(100%_-_24px)] h-[calc(100%_-_24px)] overflow-visible border-primary-50 bg-primary-950 border-[1px] flex items-end justify-center overflow-x-hidden absolute">
+                <div id="pointer" className='overflow-hidden absolute w-full h-full border-[1px] border-primary-50 origin-bottom pointer-events-none transition-transform'></div>
             </div>
         </div>
     )
