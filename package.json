@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/gapi": "^0.0.47",
     "exif-js": "^2.3.0",
+    "gapi-script": "^1.2.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
