@@ -102,10 +102,11 @@ export default function ImageSwipe({className=""}: {images?: string[], className
         if (pointer) {
             pointer.style.transition = `opacity 0.2s ease-in-out`;
             pointer.style.opacity = `0`;
+            pointer.style.translate = `translateY(90px)`;
             setImages([...images.slice(1), images[0]]);
             setTimeout(() => {
                 pointer.style.transition = `transform 0s ease-in-out`;
-                pointer.style.transform = `rotate(0deg)`;
+                pointer.style.transform = `rotate(0deg) translateY(0px)`;
                 console.log("reset");
                 pointer.style.opacity = `1`;
             }, 300)
@@ -116,7 +117,7 @@ export default function ImageSwipe({className=""}: {images?: string[], className
 
     useEffect(() => {
         setTimeout(() => {
-            setImages2([...images2.slice(1), images2[0]]);
+            setImages2([...images.slice(1), images[0]]);
         }, 200)
         
     }, [images])
@@ -134,7 +135,7 @@ export default function ImageSwipe({className=""}: {images?: string[], className
                 pointer.style.transform = `rotate(0deg)`;
                 console.log("reset");
                 pointer.style.opacity = `1`;
-            }, 200)
+            }, 300)
         }
         
         setMouseHold(false);
@@ -155,10 +156,10 @@ export default function ImageSwipe({className=""}: {images?: string[], className
     }, [mouseHold])
 
     return (
-        <div className="relative w-screen h-screen p-3 overflow-clip mb-[200px]">
+        <div className="visible sm:hidden relative w-screen h-screen overflow-clip mb-[200px]">
             <div ref={containerRef} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)} onMouseLeave={(e) => handleMouseUp(e)} onTouchStart={(e) => handleTouchStart((e))} onTouchEnd={(e) => handleMouseUp(e)} className="w-[calc(100%_-_24px)] h-[calc(100%_-_24px)] overflow-visible border-primary-50 bg-primary-950 border-[1px] flex items-end justify-center overflow-x-visible absolute">
             <img id="back-picture" src={`/photography/IMG_${images2[0]}.JPG`} alt="IMG_5092" className='w-full h-full object-cover pointer-events-none' />
-                <div id="pointer" className='absolute overflow-hidden w-full h-full border-[1px] top-0 border-primary-50 origin-bottom pointer-events-none'>
+                <div id="pointer" className='absolute overflow-hidden w-full h-full border-[1px] top-0 border-primary-50 origin-bottom pointer-events-none transition-transform'>
                     <img src={`/photography/IMG_${images[0]}.JPG`} alt="IMG_5092" className='w-full h-full object-cover pointer-events-none' />
                 </div>
             </div>
