@@ -16,7 +16,6 @@ export default function RootLayout({
 }>) {
   return (
     <html className="overflow-x-hidden w-screen" lang="en">
-      <script src="https://apis.google.com/js/client.js"></script>
       <body className={inter.className}>{children}</body>
     </html>
   );
