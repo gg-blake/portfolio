@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   // The Google Docs document ID
-  const fileId = '1p9YtlJf_vUXefmEoq6APramUdD6JW8Lf4TzY6TKf4QM';
-  // The URL to export the document as PDF
-  const key = 'AIzaSyAx5X_VyTmqLcLCcwYlUSLqljym9olmaeM';
+  const fileId = '1UZxej_Tu5yrTwfAP7fwtUb3SAgL47Pyu3eKVPd5Ix8M';
+  // The URL to export the document as PDF https://drive.google.com/file/d/1p9YtlJf_vUXefmEoq6APramUdD6JW8Lf4TzY6TKf4QM/view?usp=sharing
+  const key = 'AIzaSyBxeyGkT1vdRkw0KFD6Gr80F7qp56H-f2c';
   const exportUrl = `https://www.googleapis.com/drive/v3/files/${fileId}/export?mimeType=application/pdf&key=${key}`;
 
   try {
