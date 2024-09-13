@@ -22,7 +22,6 @@ export async function GET() {
     return new NextResponse(response.body, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="document.pdf"`,
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0',
