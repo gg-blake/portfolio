@@ -1,0 +1,14 @@
+{
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "has": [
+          {
+            "type": "host",
+            "value": "resume.moody.mx"
+          }
+        ],
+        "destination": "/api/files/resume/:path*"
+      }
+    ]
+  }
