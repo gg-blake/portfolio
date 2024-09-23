@@ -8,7 +8,7 @@
             "value": "resume.moody.mx"
           }
         ],
-        "destination": "/api/files/resume/:path*"
+        "destination": "/api/files/resume"
       }
     ]
   }
