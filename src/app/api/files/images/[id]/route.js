@@ -14,7 +14,7 @@ export async function GET(request, { params }) {
     
 
     // Fetch the image data from Google Drive
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, { next: {revalidate: 3600}});
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to fetch the image from Google Drive' }, { status: response.status });

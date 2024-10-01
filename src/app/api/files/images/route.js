@@ -10,9 +10,10 @@ export async function GET() {
 
   try {
     // Google Drive API endpoint to list files within a folder
-    const endpoint = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${key}&fields=files(id,name,mimeType,webViewLink)`;
+    const endpoint = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${key}&fields=files(id,name,mimeType)`;
 
-    const response = await fetch(endpoint);
+
+    const response = await fetch(endpoint, { next: {revalidate: 3600}});
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to fetch files from Google Drive API' }, { status: response.status });
