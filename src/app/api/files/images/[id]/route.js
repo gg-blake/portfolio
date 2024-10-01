@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request, { params }) {
   const { id } = params; // Extract the dynamic 'id' from the URL
-  const apiKey = 'AIzaSyBxeyGkT1vdRkw0KFD6Gr80F7qp56H-f2c'; // Use your Google API key from environment variables
+  const apiKey = 'AIzaSyBUQSjvlWST0MgNJ-l22X6sEUNm6vo14hU'; // Use your Google API key from environment variables
 
   if (!id) {
     return NextResponse.json({ error: 'Image ID is required' }, { status: 400 });
@@ -11,6 +11,7 @@ export async function GET(request, { params }) {
   try {
     // URL to fetch the image file content from Google Drive
     const endpoint = `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${apiKey}`;
+    
 
     // Fetch the image data from Google Drive
     const response = await fetch(endpoint);
@@ -31,6 +32,8 @@ export async function GET(request, { params }) {
       headers: {
         'Content-Type': contentType,
         'Content-Disposition': `inline; filename="image.${contentType.split('/')[1]}"`, // Serve the image inline with correct extension
+        'Access-Control-Allow-Origin': '*', // Allow all origins
+        'Access-Control-Allow-Methods': 'GET', // Allow GET method
       },
     });
   } catch (error) {
