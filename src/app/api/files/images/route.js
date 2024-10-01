@@ -16,19 +16,18 @@ export async function GET() {
     const response = await fetch(endpoint, { next: {revalidate: 3600}});
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch files from Google Drive API' }, { 
-        status: response.status,
-        headers: {
-          'Access-Control-Allow-Origin': '*', // Allow all origins
-          'Access-Control-Allow-Methods': 'GET', // Allow GET method
-        },
-       });
+      return NextResponse.json({ error: 'Failed to fetch files from Google Drive API' }, { status: response.status });
     }
 
     const data = await response.json();
 
     // Return the list of files in JSON format
-    return NextResponse.json(data.files, { status: 200 });
+    return NextResponse.json(data.files, { status: 200, 
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Allow all origins
+        'Access-Control-Allow-Methods': 'GET', // Allow GET method
+      },
+     });
   } catch (error) {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
