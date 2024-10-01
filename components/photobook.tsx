@@ -25,7 +25,7 @@ export default function Photobook() {
                 <GlitchTitle>Photos</GlitchTitle>
             </div>
             <div className="w-full grid grid-cols-3 gap-6">
-            {images.map((image: ImageResponse) => <Image src={`/api/files/images/${image.id}`} width={300} height={300} />)}
+            {images.map((image: ImageResponse) => <Image key={`/api/files/images/${image.id}`} src={`/api/files/images/${image.id}`} width={300} height={300} />)}
             </div>
         </div>
     )
