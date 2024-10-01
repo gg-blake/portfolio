@@ -16,7 +16,13 @@ export async function GET() {
     const response = await fetch(endpoint, { next: {revalidate: 3600}});
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch files from Google Drive API' }, { status: response.status });
+      return NextResponse.json({ error: 'Failed to fetch files from Google Drive API' }, { 
+        status: response.status,
+        headers: {
+          'Access-Control-Allow-Origin': '*', // Allow all origins
+          'Access-Control-Allow-Methods': 'GET', // Allow GET method
+        },
+       });
     }
 
     const data = await response.json();
