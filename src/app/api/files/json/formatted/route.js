@@ -12,7 +12,7 @@ export async function GET() {
     // Google Drive API endpoint to list files within a folder
     const endpoint = `https://www.moody.mx/api/files/json/programs`;
     const courses = {};
-    const response = await fetch(endpoint, {next: {revalidate: process.env.NEXT_PUBLIC_REVALIDATE_INTERVAL}});
+    const response = await fetch(endpoint, {next: {revalidate: process.env.NEXT_PUBLIC_REVALIDATE_INTERVAL}})
     .then(data => data.json())
     .then(programs => Promise.all(programs?.map(program => new Promise((resolve, reject) => {
         {
