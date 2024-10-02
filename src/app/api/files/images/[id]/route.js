@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request, { params }) {
   const { id } = params; // Extract the dynamic 'id' from the URL
-  const apiKey = 'AIzaSyBUQSjvlWST0MgNJ-l22X6sEUNm6vo14hU'; // Use your Google API key from environment variables
+  const apiKey = process.env.NEXT_PUBLIC_GCP_API_KEY; // Use your Google API key from environment variables
 
   if (!id) {
     return NextResponse.json({ error: 'Image ID is required' }, { status: 400 });
@@ -14,7 +14,7 @@ export async function GET(request, { params }) {
     
 
     // Fetch the image data from Google Drive
-    const response = await fetch(endpoint, { next: {revalidate: 3600}});
+    const response = await fetch(endpoint, { next: {revalidate: process.env.NEXT_PUBLIC_REVALIDATE_INTERVAL}});
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to fetch the image from Google Drive' }, { status: response.status });

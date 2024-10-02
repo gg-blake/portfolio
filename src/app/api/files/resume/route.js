@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   // The Google Docs document ID
-  const fileId = '1p9YtlJf_vUXefmEoq6APramUdD6JW8Lf4TzY6TKf4QM';
-  // The URL to export the document as PDF https://drive.google.com/file/d/1p9YtlJf_vUXefmEoq6APramUdD6JW8Lf4TzY6TKf4QM/view?usp=sharing
-  const key = 'AIzaSyBxeyGkT1vdRkw0KFD6Gr80F7qp56H-f2c';
-  const exportUrl = `https://www.googleapis.com/drive/v3/files/${fileId}/export?mimeType=application/pdf&key=${key}`;
+  const fileId = process.env.NEXT_PUBLIC_SHARED_RESUME_ID;
+  const apiKey = process.env.NEXT_PUBLIC_GCP_API_KEY;
+  const exportUrl = `https://www.googleapis.com/drive/v3/files/${fileId}/export?mimeType=application/pdf&key=${apiKey}`;
 
   try {
     // Fetch the PDF from Google Docs
