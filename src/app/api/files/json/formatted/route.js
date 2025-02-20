@@ -14,7 +14,7 @@ export async function GET() {
     const courses = {};
     const response = await fetch(endpoint, {next: {revalidate: process.env.NEXT_PUBLIC_REVALIDATE_INTERVAL}})
     .then(data => data.json())
-    .then(programs => Promise.all(programs?.map(program => new Promise((resolve, reject) => {
+    /*.then(programs => Promise.all(programs?.map(program => new Promise((resolve, reject) => {
         {
             const endpoint2 = `https://www.moody.mx/api/files/json/courses?program=${program["Program Name"]}`;
             fetch(endpoint2, {next: {revalidate: process.env.NEXT_PUBLIC_REVALIDATE_INTERVAL}})
@@ -23,12 +23,8 @@ export async function GET() {
                 courses[program["Program Name"]] = j;
                 resolve();
             })
-            .catch(err => rejects(err))
         }
-    }))))
-    .then(() => {
-        return NextResponse.json(courses, { status: 200, });
-    })
+    }))))*/
     
     if (!response.ok) {
         return NextResponse.json({ error: 'Failed to fetch files from Google Drive API' }, { status: response.status });
