@@ -32,7 +32,7 @@ const EXAMPLEPROJECT = [
                 date: "June",
                 title: "MBTA Train Tracker",
                 desc: "Using the MBTA Rest API, create a website that displayed train information such as arrival times, delays, and station closures. Was also the first project where I used TypeScript. The project was a success and was used by many of my friends and family to track times.",
-                href: "https://github.com/gg-blake/snake-ml",
+                href: "https://github.com/gg-blake/mbta-live-next",
                 location: "Home, Swampscott, MA",
                 tags: [, "TypeScript", "Firefox", "RESTful APIs", "React", "NextJS", "PyTorch"]
             },
@@ -40,7 +40,7 @@ const EXAMPLEPROJECT = [
                 date: "December",
                 title: "Music Transfer Tool",
                 desc: "Using React, a popular JavaScript framework for developing responsive, scaleable, user interfaces, I created a web tool for access music files from my home web server. This was the first time I had developed an application for my remote web server completely remotely, while I was at university. The application ran on a NodeJS server and used SFTP for secure file transfer and streaming.",
-                href: "https://github.com/gg-blake/snake-ml",
+                href: "https://github.com/gg-blake/music-transfer",
                 location: "UMass Boston, 240 William T. Morrissey Blvd.",
                 tags: [, "TypeScript", "NextJS", "React", "SFTP", "NAS", "SSH", "NodeJS"]
             },
@@ -48,7 +48,7 @@ const EXAMPLEPROJECT = [
                 date: "December",
                 title: "Minesweeper V2",
                 desc: "To improve my skills in low-level languages, I recreated my earlier python Minesweeper clone in Rust. The game had a similar GUI to the original, but was much faster.",
-                href: "https://github.com/gg-blake/snake-ml",
+                href: "https://github.com/gg-blake/rust-minesweeper",
                 location: "UMass Boston, 240 William T. Morrissey Blvd.",
                 tags: [, "Rust", "Low-level Language", "Game Development", "Memory Management", "Game Design", "GTK"]
             },
@@ -70,7 +70,7 @@ const EXAMPLEPROJECT = [
                 date: "May",
                 title: "CSClub Website",
                 desc: "",
-                href: "https://github.com/gg-blake/snake-ml",
+                href: "https://github.com/gg-blake/CS-Club-Website",
                 location: "UMass Boston, 240 William T. Morrissey Blvd.",
                 tags: [, "NextJS", "TypeScript", "React", "TailwindCSS", "HTMX", "Professionalism", "Portfolio", "Web Design"]
             },
@@ -78,7 +78,7 @@ const EXAMPLEPROJECT = [
                 date: "August",
                 title: "Web Portfolio",
                 desc: "This is it! What do you think? I created this website using NextJS, a React framework for server-side rendering. I used TypeScript to write the code, and TailwindCSS for styling. This website once it is completed will eventually be hosted on my server back home with a custom domain name.",
-                href: "https://github.com/gg-blake/snake-ml",
+                href: "https://github.com/gg-blake/portfolio",
                 location: "Soka University, 1 Chome-236 Tangimachi, Hachioji, Tokyo, JP",
                 tags: [, "NextJS", "TypeScript", "React", "TailwindCSS", "HTMX", "Professionalism", "Portfolio", "Web Design"]
             },
