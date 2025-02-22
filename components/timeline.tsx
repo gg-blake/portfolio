@@ -15,6 +15,7 @@ import ReactFlow, {
   import 'reactflow/dist/style.css';
 import { on } from "events";
 import { Program , Course } from "./timeline_type";
+import type { InferGetStaticPropsType, GetStaticProps } from 'next'
 
 const EXAMPLETIMELINE: TimelineEntry[] = [
     {
@@ -316,27 +317,155 @@ function EventCounter({count, bubbleSize, maxItems=3, spacingX=10, spacingY=0}: 
     )
 }
 
+async function getCourses() {
+    const sheetsId = process.env.NEXT_PUBLIC_SHARED_SHEETS_ID; // Retrieve the folder ID from the query parameter
+    const apiKey = process.env.NEXT_PUBLIC_GCP_API_KEY; // Use your environment variable for the Google API key
+    const table = "Courses";
+    const range = "A2:G";
+    const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${sheetsId}/values/${table}!${range}?key=${apiKey}`;
+    try {
+        const data = await fetch(endpoint, {next: {revalidate: 60}}).then(data => data.json());
+        const fields = await getFieldsCourses();
+        // @ts-ignore
+        let responseJson = [];
+        // @ts-ignore
+        data.values.map(course => {
+            let newObj = {};
+            // @ts-ignore
+            course.map((item, index) => {
+                console.log(fields)
+                // @ts-ignore
+                newObj[fields[index]] = item;
+                
+            });
+            responseJson.push(newObj);
+        })
+        // @ts-ignore
+        console.log(responseJson);
+        // @ts-ignore
+        return responseJson;
+    } catch (error) {
+      throw error;
+    }
+    
 
+
+}
+
+async function getFieldsCourses() {
+  const table = "Courses";
+  const range = "1:1";
+  const sheetsId = process.env.NEXT_PUBLIC_SHARED_SHEETS_ID; // Retrieve the folder ID from the query parameter
+  const apiKey = process.env.NEXT_PUBLIC_GCP_API_KEY; // Use your environment variable for the Google API key
+  
+  try {
+    // Google Drive API endpoint to list files within a folder
+    const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${sheetsId}/values/${table}!${range}?key=${apiKey}`;
+    
+    const response = await fetch(endpoint, {next: {revalidate: 60}});
+
+    let data = await response.json().then(data => data.values[0]);
+
+    // Return the list of files in JSON format
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getFields() {
+  const table = "Programs";
+  const range = "1:1";
+  const sheetsId = process.env.NEXT_PUBLIC_SHARED_SHEETS_ID; // Retrieve the folder ID from the query parameter
+  const apiKey = process.env.NEXT_PUBLIC_GCP_API_KEY; // Use your environment variable for the Google API key
+  
+  try {
+    // Google Drive API endpoint to list files within a folder
+    const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${sheetsId}/values/${table}!${range}?key=${apiKey}`;
+    
+    const response = await fetch(endpoint, {next: {revalidate: 60}});
+
+    if (!response.ok) {
+      return new Error('Failed to fetch files from Google Drive API');
+    }
+
+    let data = await response.json();
+    
+    
+    
+    // Return the list of files in JSON format
+    return data.values[0]
+  } catch (error) {
+    throw new Error('Internal Server Error');
+  }
+}
+
+async function getPrograms() {
+  const table = "Programs";
+  const range = "A2:F";
+  const sheetsId = process.env.NEXT_PUBLIC_SHARED_SHEETS_ID; // Retrieve the folder ID from the query parameter
+  const apiKey = process.env.NEXT_PUBLIC_GCP_API_KEY; // Use your environment variable for the Google API key
+  
+  try {
+    // Google Drive API endpoint to list files within a folder
+    const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${sheetsId}/values/${table}!${range}?key=${apiKey}`;
+    
+    const response = await fetch(endpoint, {next: {revalidate: 60}});
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch files: ${response.statusText}`);
+    }
+
+    let data = await response.json();
+    const events = await getCourses();
+    
+
+    return await getFields().then((fields) => {
+        // @ts-ignore
+        let responseJson = [];
+        data.values.map((course: any) => {
+            let newObj = {};
+            course.map((item: any, index: number) => {
+                // @ts-ignore
+                newObj[fields[index]] = item;
+            });
+            // @ts-ignore
+            newObj["Events"] = [];
+            events.map((event: any) => {
+                // @ts-ignore
+                if (event["Program Name"] == newObj["Program Name"]) {
+                    // @ts-ignore
+                    newObj["Events"].push(event);
+                }
+            })
+            responseJson.push(newObj);
+            
+        })
+        // @ts-ignore
+        return responseJson;
+    });
+    
+    
+  } catch (error) {
+    throw error;
+  }
+}
 
 const fetchAllPrograms: Promise<Program[]> = new Promise((resolve, reject) => {
-    const programs = fetch(`https://www.moody.mx/api/files/json/programs`)
-    .then(res => res.json())
+    const programs = getPrograms()
     .then(data => resolve(data))
     .catch(err => reject(err))
 })
 
 const fetchAllCourseByProgram = (program: Program) => new Promise((resolve, reject) => {
-    const courses = fetch(`https://www.moody.mx/api/files/json/courses?program=${program["Program Name"]}`)
+    const courses = fetch(`/api/files/json/courses?program=${program["Program Name"]}`)
     .then(res => res.json())
-    .then(result => {
-        console.log(result)
-        resolve(result)
-    })
+    .then(result => resolve(result))
     .catch(err => reject(err))
 })
 
 const fetchAllCourses: Promise<any> = new Promise((resolve, reject) => {
-    const programs = fetch(`https://www.moody.mx/api/files/json/formatted`)
+    const programs = fetch(`http://localhost:3000/api/files/json/formatted`)
     .then(res => res.json())
     .then(data => resolve(data))
     .catch(err => reject(err))
@@ -373,16 +502,19 @@ function CourseEvent({course, index, focusedEvent, onClick, onReset}: {course: C
     )
 }
 
-function ProgramEvent(props: any, {courses}: {courses: Course[]}) {
+function ProgramEvent({program, courses}: {program: Program, courses: Course[]}) {
     const [focusedEvent, setFocusedEvent] = useState<number>(-1);
+    useEffect(() => {
+        console.log(program);
+    }, [])
     // {props.length > 0 && <div className="mt-3"><EventCounter count={props.events.length} bubbleSize={30} maxItems={3} spacingX={15} spacingY={0} /></div>}
 
     return (
         <div className="flex flex-col sm:flex-row gap-3">
             <div className="w-full sm:max-w-[400px] h-auto p-3 box-border border-[1px] border-primary-50 flex flex-col gap-[5px]">
-                <h2 className="text-primary-50 opacity-80 text-sm font-bold p-[3px] m-0">{props["Location"]}</h2>
-                <h1 className="text-primary-50 text-4xl font-bold p-[3px] m-0">{props["Program Name"]}</h1>
-                <div className="text-base font-normal p-[3px] m-0 w-full text-left sm:text-justify">{props["Program Description"]}</div>
+                <h2 className="text-primary-50 opacity-80 text-sm font-bold p-[3px] m-0">{program["Location"]}</h2>
+                <h1 className="text-primary-50 text-4xl font-bold p-[3px] m-0">{program["Program Name"]}</h1>
+                <div className="text-base font-normal p-[3px] m-0 w-full text-left sm:text-justify">{program["Program Description"]}</div>
             </div>
             <div style={{maxWidth: focusedEvent != -1 ? "min(600px, 100%)" : "300px"}} className="w-auto h-auto max-w-full lg:max-w-[300px] flex flex-col gap-3">{courses?.map((course: Course, i: number) => <CourseEvent key={`event-item-${i}`} index={i} course={course} focusedEvent={focusedEvent} onClick={() => setFocusedEvent(i)} onReset={() => setFocusedEvent(-1)} />)}</div>
             
@@ -390,18 +522,22 @@ function ProgramEvent(props: any, {courses}: {courses: Course[]}) {
     )
 }
 
+
+
 export default function Timeline() {
+    
+    
     const [focusedEvent, setFocusedEvent] = useState<number>(-1);
 
     const programs = use(fetchAllPrograms);
-    const courses = use(fetchAllCourses);
-
+    
+    
     return (
         <div id="timeline" className="w-screen h-auto p-3 flex flex-col gap-3 z-40">
             <div className="sticky top-[calc(70px+.75rem)] p-3 border-primary-50 border-[1px] box-border z-[900] bg-primary-950">
                 <GlitchTitle>Timeline</GlitchTitle>
             </div>
-            { programs?.map((program: Program, i: number) => <ProgramEvent key={`timeline-entry-${i}`} {...program} courses={courses![program["Program Name"]]} /> )}
+            { programs?.map((program: Program, i: number) => <ProgramEvent key={`timeline-entry-${i}`} program={program} courses={program["Events"]} /> )}
             
         </div>
     )

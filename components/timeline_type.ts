@@ -5,6 +5,7 @@ interface Program {
     "Start": string;
     "End": string;
     "Program Description": string;
+    "Events": Course[];
 }
 
 interface Course {

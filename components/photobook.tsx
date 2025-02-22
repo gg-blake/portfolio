@@ -6,8 +6,7 @@ import GlitchTitle from "./glitch_text";
 import { ImageResponse } from "next/server";
 import ImageFetcher from "./image-fetcher";
 import Image from 'next/image';
-
-const IMAGE_ENDPOINT = "https://www.moody.mx/api/files/images";
+//https://drive.google.com/file/d/1lB1ywWCbvi2VJBZJ2PcYWh_O5Aa3Em9i/view?usp=sharing
 
 function Photo({ src }: { src: string} ) {
     const [metaData, setMetaData] = useState({});
@@ -23,7 +22,7 @@ function Photo({ src }: { src: string} ) {
 
     return (
         <div className="flex flex-col gap-3">
-            <Image id={`${src}`} src={`${IMAGE_ENDPOINT}/${src}`} onLoad={(img: Image) => populateMetadata(img)} width={300} height={300} />
+            <Image id={`${src}`} src={`https://drive.google.com/file/d/1lB1ywWCbvi2VJBZJ2PcYWh_O5Aa3Em9i&export`} onLoad={(img: Image) => populateMetadata(img)} width={300} height={300} />
             <span className="flex flex-wrap w-full h-auto text-[.6rem] font-normal gap-3">
                 <svg className="fill-white inline-block" xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15"><path d="M480-275.386q68.846 0 116.73-47.884T644.614-440q0-68.846-47.884-116.73T480-604.614q-68.846 0-116.73 47.884T315.386-440q0 68.846 47.884 116.73T480-275.386Zm0-59.998q-44.308 0-74.462-30.154-30.154-30.154-30.154-74.462 0-44.308 30.154-74.462 30.154-30.154 74.462-30.154 44.308 0 74.462 30.154 30.154 30.154 30.154 74.462 0 44.308-30.154 74.462-30.154 30.154-74.462 30.154ZM172.309-140.001q-30.308 0-51.308-21t-21-51.308v-455.382q0-30.308 21-51.308t51.308-21h122.153l74-80h223.076l74 80h122.153q30.308 0 51.308 21t21 51.308v455.382q0 30.308-21 51.308t-51.308 21H172.309Z"/></svg>
                 {metaData && metaData.Model}
@@ -41,7 +40,6 @@ function Photo({ src }: { src: string} ) {
                     <span>{metaData && `${metaData.FocalLength}mm`}</span>
                     <div className="w-[4px] h-[4px] rounded-full bg-white" />
                     <span>{metaData && `ISO${metaData.ISOSpeedRatings}`}</span>
-                    
                 </span>
             </span>
         </div>
@@ -50,7 +48,7 @@ function Photo({ src }: { src: string} ) {
 
 
 const fetchImages = new Promise(async (resolve, reject) => {
-    const image = fetch(IMAGE_ENDPOINT)
+    const image = fetch('https://www.moody.mx/api/files/images')
     .then(res => res.json())
     .then(data => resolve(data))
     .catch(err => reject(err))
