@@ -20,7 +20,7 @@ export default function Home() {
       <Projects />
       <Statement>{"In my spare time, I also practice photography. Recently, I've been documenting my adventures while studying abroad at Soka University, in Japan. If you get the chance, check out "}<a className='text-blue-400 underline' href="https://www.instagram.com/picsover9000/" target="_blank" rel="noreferrer">@picsover9000</a> on Instagram.</Statement>
       <Photobook />
-      <Statement>For all business related inquiries, you can submit the form below or email <a className="text-blue-400 underline" href="blake@moody.mx" target="_blank" rel="noreferrer">blake@moody.mx</a> directly.</Statement>
+      <Statement>For all business related inquiries, please email <a className="text-blue-400 underline" href="blake@moody.mx" target="_blank" rel="noreferrer">blake@moody.mx</a> directly.</Statement>
       <div className="w-full h-[400px]"></div>
     </div>
   )
